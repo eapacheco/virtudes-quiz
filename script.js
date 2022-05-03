@@ -27,7 +27,7 @@ init()
 // Define initial state
 function init() {
     // Reset flow control
-    currentState = QUIZ
+    currentState = START
     curQuestion = 0
     scores = [
         [], // EXCELENCIA_MORAL
