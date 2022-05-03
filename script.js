@@ -27,16 +27,16 @@ init()
 // Define initial state
 function init() {
     // Reset flow control
-    currentState = START
+    currentState = QUIZ
     curQuestion = 0
     scores = [
-        0, // EXCELENCIA_MORAL
-        0, // CONHECIMENTO
-        0, // DOMINIO_PROPRIO
-        0, // PERSEVERANCA
-        0, // DEVOCAO
-        0, // FRATERNIDADE
-        0, // AMOR
+        [], // EXCELENCIA_MORAL
+        [], // CONHECIMENTO
+        [], // DOMINIO_PROPRIO
+        [], // PERSEVERANCA
+        [], // DEVOCAO
+        [], // FRATERNIDADE
+        [], // AMOR
     ]
 
     displayStatePage()
@@ -73,7 +73,10 @@ function previousQuestion() {
         return;
     }
 
+    // Remove latest answer
     curQuestion--
+    let { category } = QUESTIONS[curQuestion]
+    scores[category].pop()
     displayStatePage()
 }
 
@@ -88,11 +91,14 @@ function answerQuestion(ele) {
         Array.prototype.forEach.call(optionButtons, (btn) => btn.disabled = false)
 
         let { category, order } = QUESTIONS[curQuestion]
+        value = parseInt(ele.value)
 
         if (order == ASCENDING) {
-            scores[category] += ele.value
+            // Natural value order: 1, 2, 3, 4, 5
+            scores[category].push(value)
         } else {
-            scores[category] += MAX_QUESTION_SCORE + MIN_QUESTION_SCORE - ele.value
+            // Inverse value order: 5, 4, 3, 2, 1
+            scores[category].push(MAX_QUESTION_SCORE + MIN_QUESTION_SCORE - value)
         }
 
         // End of questions
@@ -108,10 +114,13 @@ function answerQuestion(ele) {
 
 // Set markers list with results
 function setUpMarkersList() {
-    total = Array.prototype.reduce.call(scores, (prev, cur) => prev + cur, 0)
+    total = scores.reduce((acc, cur) => acc + cur.reduce((acc, cur) => acc + cur, 0), 0)
 
     Array.prototype.forEach.call(resultValueCell, (cell, idx) => {
-        cell.textContent = toPercentage(scores[idx], MAX_GROUP_SCORE)
+        cell.textContent = toPercentage(
+            scores[idx].reduce((acc, cur) => acc + cur, 0),
+            scores[idx].length * MAX_QUESTION_SCORE
+        )
     })
 
     resultMediaCell.textContent = toPercentage(total, QUESTIONS.length * MAX_QUESTION_SCORE)

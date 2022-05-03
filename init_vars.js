@@ -19,7 +19,6 @@ const ASCENDING = 1
 const DESCENDING = 2
 
 // Score calculation constants
-const MAX_GROUP_SCORE = 25
 const MAX_QUESTION_SCORE = 5
 const MIN_QUESTION_SCORE = 1
 
