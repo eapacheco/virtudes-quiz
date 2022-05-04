@@ -33,3 +33,6 @@ const INFO_DATA = [
 var currentState
 var curQuestion
 var scoreGroups
+
+// How long to wait for animation on answer selected
+var ANIMATION_DELAY = 1000

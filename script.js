@@ -87,9 +87,7 @@ function answerQuestion(ele) {
     optionButtons.forEach((btn) => btn.disabled = true)
     ele.classList.add('clicked');
 
-    // Wait for button transition
-    window.setTimeout(function () {
-        ele.classList.remove('clicked')
+    const afterAnimation = () => {
         optionButtons.forEach((btn) => btn.disabled = false)
 
         let { category, order } = questions[curQuestion]
@@ -111,7 +109,17 @@ function answerQuestion(ele) {
 
         curQuestion++
         displayStatePage()
-    }, 800);
+    }
+
+    // Wait for button transition
+    window.setTimeout(function () {
+        ele.classList.remove('clicked')
+
+        window.setTimeout(function () {
+            afterAnimation()
+        }, ANIMATION_DELAY / 2);
+
+    }, ANIMATION_DELAY / 2);
 }
 
 // Set markers list with results

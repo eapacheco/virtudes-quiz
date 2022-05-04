@@ -101,7 +101,7 @@ footer {
   box-shadow: none;
   align-items: center;
   height: 45px;
-  transition: background-color 1s;
+  transition: background-color 0.6s;
 }
 
 .quiz-btn-option:disabled {
