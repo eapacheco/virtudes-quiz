@@ -92,7 +92,8 @@ footer {
   flex-direction: column;
 }
 
-.quiz-btn-option {
+.quiz-btn-option,
+.quiz-btn-option:hover {
   display: flex;
   margin: 0.25em;
   border: #6247aa 1px solid;
