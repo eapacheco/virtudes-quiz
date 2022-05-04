@@ -19,8 +19,8 @@ const ASCENDING = 1
 const DESCENDING = 2
 
 // Score calculation constants
-const MAX_QUESTION_SCORE = 5
-const MIN_QUESTION_SCORE = 1
+const MAX_QUESTION_SCORE = 4
+const MIN_QUESTION_SCORE = 0
 
 // Info constants
 const INFO_DATA = [
@@ -32,4 +32,4 @@ const INFO_DATA = [
 // Define variables
 var currentState
 var curQuestion
-var scores
+var scoreGroups

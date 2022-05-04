@@ -10,10 +10,10 @@ const questionCount = document.getElementsByClassName('quiz-count').item(0)
 const questionTotal = document.getElementsByClassName('quiz-total').item(0)
 
 // All option buttons
-const optionButtons = document.getElementsByClassName('quiz-btn-option')
+const optionButtons = htmlToArray(document.getElementsByClassName('quiz-btn-option'))
 
 // All result table value cells
-const resultValueCell = document.getElementsByClassName('result-table--value')
+const resultValueCell = htmlToArray(document.getElementsByClassName('result-table--value'))
 // Only the media cell
 const resultMediaCell = document.getElementsByClassName('result-table--media').item(0)
 
@@ -29,7 +29,7 @@ function init() {
     // Reset flow control
     currentState = START
     curQuestion = 0
-    scores = [
+    scoreGroups = [
         [], // EXCELENCIA_MORAL
         [], // CONHECIMENTO
         [], // DOMINIO_PROPRIO
@@ -78,29 +78,29 @@ function previousQuestion() {
     // Remove latest answer
     curQuestion--
     let { category } = questions[curQuestion]
-    scores[category].pop()
+    scoreGroups[category].pop()
     displayStatePage()
 }
 
 // Answer question
 function answerQuestion(ele) {
-    Array.prototype.forEach.call(optionButtons, (btn) => btn.disabled = true)
+    optionButtons.forEach((btn) => btn.disabled = true)
     ele.classList.add('clicked');
 
     // Wait for button transition
     window.setTimeout(function () {
         ele.classList.remove('clicked')
-        Array.prototype.forEach.call(optionButtons, (btn) => btn.disabled = false)
+        optionButtons.forEach((btn) => btn.disabled = false)
 
         let { category, order } = questions[curQuestion]
         value = parseInt(ele.value)
 
         if (order == ASCENDING) {
             // Natural value order: 1, 2, 3, 4, 5
-            scores[category].push(value)
+            scoreGroups[category].push(value)
         } else {
             // Inverse value order: 5, 4, 3, 2, 1
-            scores[category].push(MAX_QUESTION_SCORE + MIN_QUESTION_SCORE - value)
+            scoreGroups[category].push(MAX_QUESTION_SCORE + MIN_QUESTION_SCORE - value)
         }
 
         // End of questions
@@ -116,27 +116,42 @@ function answerQuestion(ele) {
 
 // Set markers list with results
 function setUpMarkersList() {
-    total = scores.reduce((acc, cur) => acc + cur.reduce((acc, cur) => acc + cur, 0), 0)
-
-    Array.prototype.forEach.call(resultValueCell, (cell, idx) => {
-        cell.textContent = toPercentage(
-            scores[idx].reduce((acc, cur) => acc + cur, 0),
-            scores[idx].length * MAX_QUESTION_SCORE
+    resultValueCell.forEach((cell, idx) => {
+        cell.textContent = scaleToHundred(
+            sum(scoreGroups[idx]),
+            scoreGroups[idx].length * MAX_QUESTION_SCORE
         )
     })
 
-    resultMediaCell.textContent = toPercentage(total, questions.length * MAX_QUESTION_SCORE)
+    resultMediaCell.textContent = scaleToHundred(
+        sum(scoreGroups, (value) => sum(value)),
+        questions.length * MAX_QUESTION_SCORE)
 }
 
 
 // Utilitary functions
-function toPercentage(partial, total, precision = 4) {
-    percent = (partial / total)
+function scaleToHundred(partial, total) {
+    ratio = (100 / total)
 
-    return (100 * percent).toPrecision(precision) + '%'
+    return (partial * ratio).toFixed(0)
 }
 
 // Shuffle array
 function shuffle(arr) {
     return arr.sort(() => Math.random() - 0.5)
+}
+
+// Sum all values of the array
+function sum(arr, mapCur = (cur) => cur) {
+    return arr.reduce((acc, cur) => acc + mapCur(cur), 0)
+}
+
+// Copy html element from collection into array
+function htmlToArray(htmlCollection) {
+    var array = [];
+    for (let i = 0; i < htmlCollection.length; i++) {
+        array.push(htmlCollection[i]);
+    }
+
+    return array
 }
