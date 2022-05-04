@@ -39,6 +39,8 @@ function init() {
         [], // AMOR
     ]
 
+
+    questions = shuffle(questions)
     displayStatePage()
 }
 
@@ -51,9 +53,9 @@ function displayStatePage() {
 
     // Write current question
     if (currentState == QUIZ) {
-        questionTitle.innerHTML = `${curQuestion + 1}.&emsp;${QUESTIONS[curQuestion].title}`
+        questionTitle.innerHTML = `${curQuestion + 1}.&emsp;${questions[curQuestion].title}`
         questionCount.textContent = curQuestion + 1
-        questionTotal.textContent = QUESTIONS.length
+        questionTotal.textContent = questions.length
     } else if (currentState == RESULT) {
         setUpMarkersList()
     }
@@ -75,7 +77,7 @@ function previousQuestion() {
 
     // Remove latest answer
     curQuestion--
-    let { category } = QUESTIONS[curQuestion]
+    let { category } = questions[curQuestion]
     scores[category].pop()
     displayStatePage()
 }
@@ -90,7 +92,7 @@ function answerQuestion(ele) {
         ele.classList.remove('clicked')
         Array.prototype.forEach.call(optionButtons, (btn) => btn.disabled = false)
 
-        let { category, order } = QUESTIONS[curQuestion]
+        let { category, order } = questions[curQuestion]
         value = parseInt(ele.value)
 
         if (order == ASCENDING) {
@@ -102,7 +104,7 @@ function answerQuestion(ele) {
         }
 
         // End of questions
-        if (curQuestion == QUESTIONS.length - 1) {
+        if (curQuestion == questions.length - 1) {
             nextState()
             return;
         }
@@ -123,7 +125,7 @@ function setUpMarkersList() {
         )
     })
 
-    resultMediaCell.textContent = toPercentage(total, QUESTIONS.length * MAX_QUESTION_SCORE)
+    resultMediaCell.textContent = toPercentage(total, questions.length * MAX_QUESTION_SCORE)
 }
 
 
@@ -132,4 +134,9 @@ function toPercentage(partial, total, precision = 4) {
     percent = (partial / total)
 
     return (100 * percent).toPrecision(precision) + '%'
+}
+
+// Shuffle array
+function shuffle(arr) {
+    return arr.sort(() => Math.random() - 0.5)
 }

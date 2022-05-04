@@ -1,8 +1,8 @@
-const QUESTIONS = [
+var questions = [
   {
     title: "Você devolve os objetos que pegou emprestado?",
     category: EXCELENCIA_MORAL,
-    order: DESCENDING,
+    order: ASCENDING,
   },
   {
     title: "Você enfrenta a fila (cantina, ônibus, cinema), mesmo que tenha oportunidade de fura-la?",
