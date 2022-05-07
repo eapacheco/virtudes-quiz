@@ -33,13 +33,6 @@ const DESCENDING = 2
 const MAX_QUESTION_SCORE = 4
 const MIN_QUESTION_SCORE = 0
 
-// Info constants
-const INFO_DATA = [
-    'Vamos te ajudar a compreender suas virtudes!',
-    'O resultado no final, independe de tempo.',
-    'Você pode fazer o teste quantas vezes quiser.',
-]
-
 // Define variables
 var currentState
 var curQuestion

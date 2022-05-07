@@ -81,6 +81,52 @@ footer {
   margin-top: 1.5vh;
 }
 
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-logo {
+  margin: auto;
+  margin-top: 0;
+  margin-bottom: 16px;
+  width: 180px;
+  margin-top: 1.5vh;
+}
+
+.info-bible-link {
+  color: #6247aa;
+  filter: brightness(1.5);
+}
+
+.info-bible-link:visited {
+  color: #6247aa;
+  filter: brightness(1);
+}
+
+.info-quote-body {
+  font-style: italic;
+}
+
+.info-quote-autor {
+  text-align: right;
+}
+
+.info footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info-btn {
+  width: 200px;
+}
+
+.info-copyright {
+  font-size: x-small;
+  padding-top: 1.5em;
+}
+
 .quiz-back_btn {
   display: flex;
   width: min-content;
@@ -136,8 +182,6 @@ footer {
   width: 180px;
   margin-top: 1.5vh;
 }
-
-/* RESULT LIST - TABLE STYLING */
 
 .result-table {
   display: flex;

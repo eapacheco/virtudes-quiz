@@ -36,18 +36,45 @@
     </div>
 
     <!-- Info Box -->
-    <div class="info container" style="display: none;">
-        <header><span>Como funciona o teste?</span></header>
-        <section>
-            <ol>
-                <script>
-                    INFO_DATA.forEach(str => { document.writeln(`<li>${str}</li>`) })
-                </script>
-            </ol>
-        </section>
-        <footer>
-            <button class="btn btn-my" onclick="nextState()">Começar</button>
-        </footer>
+    <div class="info" style="display: none;">
+        <img class="info-logo" src="resources/logo.svg" />
+        <div class="container">
+            <header><span>Crescimento na fé</span></header>
+            <section>
+                <div class="info-quote-body">
+                    Deus, com seu poder divino, nos concede tudo de que necessitamos para uma vida de devoção, pelo
+                    conhecimento completo daquele que nos chamou para si por meio de sua glória e excelência
+                    &ensp;&hellip;
+                </div>
+                <div class="info-quote-autor">
+                    &mdash; NVT, 2 Pedro 1:3-11 <sup>(<a class="info-bible-link"
+                            href="https://www.bible.com/pt/bible/1930/2PE.1.NVT">ler</a>)</sup>
+                </div>
+                <hr>
+                <div>
+                    <b>Como funciona o Quiz?</b>
+                    Oi! Estamos aqui para te ajudar a analisar o desenvolvimento das virtudes da sua fé!
+                    Lembre-se:
+                    <ul>
+                        <li>O resultado reflete tão somente o que <em>você pensa de si mesmo</em>, e varia conforme o
+                            seu
+                            humor;
+                        </li>
+                        <li>O tempo que você demora não importa;</li>
+                        <li>As opções serão sempre as mesmas;</li>
+                        <li>Que nós participemos da <em>natureza divina</em> e sejam produtivos e úteis no conhecimento
+                            de
+                            nosso Senhor Jesus Cristo! Amém.
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <footer>
+                <button class="btn btn-my info-btn" onclick="nextState()">Começar</button>
+                <div class="info-copyright">Ministério MODIFIQUE &ndash; Igreja Batista Lindoia (Curitiba, PR)</small>
+                </div>
+            </footer>
+        </div>
     </div>
 
     <!-- Quiz Box -->
