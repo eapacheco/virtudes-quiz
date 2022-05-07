@@ -206,3 +206,22 @@ function htmlToArray(htmlCollection) {
 
     return array
 }
+
+// Export DOM usig html-to-img library
+function exportResults() {
+    // Hide elements to be ommited;
+    htmlToArray(document.getElementsByClassName('do-not-export')).forEach((ele) => ele.style.visibility = "hidden")
+
+    var node = document.getElementsByClassName('result-to-export').item(0);
+
+    htmlToImage.toJpeg(node, { quality: 0.95 })
+        .then(function (dataUrl) {
+            var link = document.createElement('a');
+            link.download = 'construindo-a-fé.jpeg';
+            link.href = dataUrl;
+            link.click();
+            // FIX-ME: The empty space at the end of the download doesn't look good at all.
+            // Neither does the empty black space at the beginning.
+            htmlToArray(document.getElementsByClassName('do-not-export')).forEach((ele) => ele.style.visibility = "visible")
+        });
+}

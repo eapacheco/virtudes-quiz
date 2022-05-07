@@ -112,7 +112,7 @@ footer {
   text-align: right;
 }
 
-.info footer {
+.info-footer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -203,4 +203,19 @@ footer {
 .result-table--max-score {
   font-size: x-small;
   opacity: 50%;
+}
+
+.result-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.result-copyright {
+  font-size: x-small;
+  padding-bottom: 1.5em;
+}
+
+.result-btn {
+  width: 200px;
 }
