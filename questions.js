@@ -55,7 +55,7 @@ var questions = [
     order: ASCENDING,
   },
   {
-    title: "Você tem tido discernimento quanto o certo e errado dentro da vontade de Deus?",
+    title: "Você tem tido discernimento quanto ao certo e errado dentro da vontade de Deus?",
     category: CONHECIMENTO,
     order: ASCENDING,
   },

@@ -14,6 +14,17 @@ const DEVOCAO = 4
 const FRATERNIDADE = 5
 const AMOR = 6
 
+// Declaring titles
+const CATEGORY_TITLES = [
+    "Excelência Moral",
+    "Conhecimento",
+    "Domínio Próprio",
+    "Perseverança",
+    "Devoção",
+    "Fraternidade",
+    "Amor",
+]
+
 // Question orders
 const ASCENDING = 1
 const DESCENDING = 2
@@ -26,7 +37,7 @@ const MIN_QUESTION_SCORE = 0
 const INFO_DATA = [
     'Vamos te ajudar a compreender suas virtudes!',
     'O resultado no final, independe de tempo.',
-    'Você pode fazer o teste quantaas vezes quiser.',
+    'Você pode fazer o teste quantas vezes quiser.',
 ]
 
 // Define variables

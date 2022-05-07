@@ -58,6 +58,7 @@ function displayStatePage() {
         questionTotal.textContent = questions.length
     } else if (currentState == RESULT) {
         setUpMarkersList()
+        setUpResultChart()
     }
 }
 
@@ -133,9 +134,51 @@ function setUpMarkersList() {
 
     resultMediaCell.textContent = scaleToHundred(
         sum(scoreGroups, (value) => sum(value)),
-        questions.length * MAX_QUESTION_SCORE)
+        sum(scoreGroups, (value) => value.length) * MAX_QUESTION_SCORE)
 }
 
+// Set chart with results
+function setUpResultChart() {
+    new Chart("result_chart", {
+        type: "line",
+        data: {
+            labels: CATEGORY_TITLES.map((str) => str.substring(0, 6)),
+            datasets: [{
+                fill: false,
+                lineTension: 0,
+                backgroundColor: "rgba(98, 71, 170, 1.0)",
+                borderColor: "rgba(98, 71, 170, 0.1)",
+                data: scoreGroups.map((group) => scaleToHundred(sum(group), group.length * MAX_QUESTION_SCORE))
+            }]
+        },
+        options: {
+            scales: {
+                y: { min: 0, max: 100, }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    text: 'FÉ',
+                    position: 'bottom',
+                },
+                tooltip: {
+                    displayColors: false,
+                    callbacks: {
+                        title: (tooltipItems) => {
+                            return CATEGORY_TITLES[tooltipItems[0].dataIndex];
+                        },
+                        label: (context) => {
+                            return context.parsed.y + " pontos";
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
 
 // Utilitary functions
 function scaleToHundred(partial, total) {
